@@ -13,10 +13,13 @@
                         ControlToValidate="txtNombre"
                         ErrorMessage="Este campo es obligatorio"
                         CssClass="text-danger"
-                        Display="Dynamic" />
-                </div>
+                        Display="Dynamic"
+                        ValidationGroup="CategoriaValidacion"/>
+               </div>
                 <div class="col-md-6 d-flex align-items-end">
-                    <asp:Button ID="btnAgregar" runat="server" Text="Agregar" CssClass="btn btn-primary" OnClick="btnAgregar_Click" />
+                    <asp:Button ID="btnAgregar" runat="server" Text="Agregar" CssClass="btn btn-primary" OnClick="btnAgregar_Click" ValidationGroup="CategoriaValidacion" />
+                    <asp:Button ID="btnActualizar" runat="server" Text="Actualizar" CssClass="btn btn-success ms-2" OnClick="btnActualizar_Click" Visible="false" ValidationGroup="CategoriaValidacion" />
+                    <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-secondary" OnClick="btnCancelar_Click" CausesValidation="false" Visible="false" />
                 </div>
             </div>
         </div>

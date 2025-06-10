@@ -60,6 +60,16 @@ namespace sistemaAplicaciones
                 CargarCategorias();
             }
         }
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            txtNombre.Text = "";
+            ViewState["idCategoriaEditar"] = null;
+
+            // Restaurar visibilidad de botones
+            btnAgregar.Visible = true;
+            btnActualizar.Visible = false;
+            btnCancelar.Visible = false;
+        }
 
         protected void gvCategorias_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -95,12 +105,50 @@ namespace sistemaAplicaciones
                         {
                             txtNombre.Text = dr["nombre"].ToString();
 
+                            // Guardar el ID de la categoría para actualizar luego
+                            ViewState["idCategoriaEditar"] = id;
+
+                            // Cambiar visibilidad de botones
+                            btnAgregar.Visible = false;
+                            btnActualizar.Visible = true;
+                            btnCancelar.Visible = true;
                         }
                         conn.Close();
                     }
                 }
             }
 
+        }
+        protected void btnActualizar_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid && ViewState["idCategoriaEditar"] != null)
+            {
+                int id = Convert.ToInt32(ViewState["idCategoriaEditar"]);
+
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand("sp_EditarCategoria", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
+
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                    }
+                }
+
+                txtNombre.Text = "";
+                ViewState["idCategoriaEditar"] = null;
+
+                // Mostrar botones adecuados
+                btnAgregar.Visible = true;
+                btnActualizar.Visible = false;
+                btnCancelar.Visible = false;
+
+                CargarCategorias();
+            }
         }
     }
 }
