@@ -50,5 +50,23 @@ namespace sistemaAplicaciones
             }
         }
 
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection con = new SqlConnection(conexion))
+            {
+                SqlCommand cmd = new SqlCommand("sp_InsertarAplicacion", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
+                cmd.Parameters.AddWithValue("@descripcion", txtDescripcion.Text);
+                cmd.Parameters.AddWithValue("@categoria_id", ddlCategoria.SelectedValue);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                lblMensaje.Text = "Aplicación agregada correctamente.";
+                LimpiarFormulario();
+                MostrarAplicaciones();
+            }
+        }
+
     }
 }
