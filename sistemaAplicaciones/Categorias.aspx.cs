@@ -61,5 +61,46 @@ namespace sistemaAplicaciones
             }
         }
 
+        protected void gvCategorias_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int id = Convert.ToInt32(e.CommandArgument);
+
+            if (e.CommandName == "Eliminar")
+            {
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand("sp_EliminarCategoria", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@id", id);
+
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                    }
+                }
+
+                CargarCategorias();
+            }
+            if (e.CommandName == "Editar")
+            {
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand("SELECT * FROM Categoria WHERE id = @id", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", id);
+                        conn.Open();
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            txtNombre.Text = dr["nombre"].ToString();
+
+                        }
+                        conn.Close();
+                    }
+                }
+            }
+
+        }
     }
 }
