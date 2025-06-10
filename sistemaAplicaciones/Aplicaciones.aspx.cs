@@ -68,5 +68,46 @@ namespace sistemaAplicaciones
             }
         }
 
+        protected void gvAplicaciones_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "EditarRegistro")
+            {
+                int id = Convert.ToInt32(e.CommandArgument);
+                using (SqlConnection con = new SqlConnection(conexion))
+                {
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM Aplicacion WHERE id = @id", con);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    con.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        hfId.Value = dr["id"].ToString();
+                        txtNombre.Text = dr["nombre"].ToString();
+                        txtDescripcion.Text = dr["descripcion"].ToString();
+                        ddlCategoria.SelectedValue = dr["categoria_id"].ToString();
+
+                        btnAgregar.Visible = false;
+                        btnActualizar.Visible = true;
+                        btnCancelar.Visible = true;
+                    }
+                }
+            }
+            else if (e.CommandName == "EliminarRegistro")
+            {
+                int id = Convert.ToInt32(e.CommandArgument);
+                using (SqlConnection con = new SqlConnection(conexion))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_EliminarAplicacion", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", id);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    lblMensaje.Text = "Aplicación eliminada correctamente.";
+                    MostrarAplicaciones();
+                }
+            }
+        }
+
+
     }
 }
