@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="Gestión de Aplicaciones" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Aplicaciones.aspx.cs" Inherits="sistemaAplicaciones.Aplicaciones" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="container mt-5">
         <h2 class="mb-4">Gestión de Aplicaciones</h2>
 
         <!-- Formulario -->
@@ -29,4 +30,22 @@
                 <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-secondary" Text="Cancelar" OnClick="btnCancelar_Click" Visible="false" />
             </div>
         </div>
+
+        <asp:GridView ID="gvAplicaciones" runat="server" CssClass="table table-bordered table-striped" AutoGenerateColumns="False" OnRowCommand="gvAplicaciones_RowCommand">
+            <Columns>
+                <asp:BoundField DataField="id" HeaderText="ID" />
+                <asp:BoundField DataField="nombre" HeaderText="Nombre" />
+                <asp:BoundField DataField="descripcion" HeaderText="Descripción" />
+                <asp:BoundField DataField="categoria" HeaderText="Categoría" />
+                <asp:TemplateField HeaderText="Acciones">
+                    <ItemTemplate>
+                        <asp:Button ID="btnEditar" runat="server" Text="Editar" CssClass="btn btn-sm btn-warning" CommandName="EditarRegistro" CommandArgument='<%# Eval("id") %>' />
+                        <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btn btn-sm btn-danger" CommandName="EliminarRegistro" CommandArgument='<%# Eval("id") %>' OnClientClick="return confirm('¿Estás seguro de eliminar este registro?');" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+
+        <asp:Label ID="lblMensaje" runat="server" CssClass="text-success"></asp:Label>
+    </div>
 </asp:Content>
