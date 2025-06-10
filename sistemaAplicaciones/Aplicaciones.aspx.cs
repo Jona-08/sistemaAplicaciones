@@ -22,5 +22,33 @@ namespace sistemaAplicaciones
                 MostrarAplicaciones();
             }
         }
+
+        private void CargarCategorias()
+        {
+            using (SqlConnection con = new SqlConnection(conexion))
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("sp_VisualizarCategorias", con);
+                SqlDataReader dr = cmd.ExecuteReader();
+                ddlCategoria.DataSource = dr;
+                ddlCategoria.DataTextField = "nombre";
+                ddlCategoria.DataValueField = "id";
+                ddlCategoria.DataBind();
+                ddlCategoria.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Seleccione una categoría", "0"));
+            }
+        }
+
+        private void MostrarAplicaciones()
+        {
+            using (SqlConnection con = new SqlConnection(conexion))
+            {
+                SqlDataAdapter da = new SqlDataAdapter("sp_VisualizarAplicaciones", con);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                gvAplicaciones.DataSource = dt;
+                gvAplicaciones.DataBind();
+            }
+        }
+
     }
 }
