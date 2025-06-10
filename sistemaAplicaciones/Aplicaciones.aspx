@@ -9,25 +9,25 @@
             <div class="form-group">
                 <label>Nombre:</label>
                 <asp:TextBox ID="txtNombre" CssClass="form-control" runat="server" />
-                <asp:RequiredFieldValidator ID="rfvNombre" runat="server" ControlToValidate="txtNombre" CssClass="text-danger" ErrorMessage="* Campo obligatorio" Display="Dynamic" />
+                <asp:RequiredFieldValidator ID="rfvNombre" runat="server" ControlToValidate="txtNombre" CssClass="text-danger" ErrorMessage="* Campo obligatorio" Display="Dynamic" ValidationGroup="AppValidaciones" />
             </div>
             <div class="form-group">
                 <label>Descripción:</label>
                 <asp:TextBox ID="txtDescripcion" CssClass="form-control" runat="server" />
-                <asp:RequiredFieldValidator ID="rfvDescripcion" runat="server" ControlToValidate="txtDescripcion" CssClass="text-danger" ErrorMessage="* Campo obligatorio" Display="Dynamic" />
+                <asp:RequiredFieldValidator ID="rfvDescripcion" runat="server" ControlToValidate="txtDescripcion" CssClass="text-danger" ErrorMessage="* Campo obligatorio" Display="Dynamic" ValidationGroup="AppValidaciones" />
             </div>
             <div class="form-group">
                 <label>Categoría:</label>
                 <asp:DropDownList ID="ddlCategoria" CssClass="form-control" runat="server" />
-                <asp:RequiredFieldValidator ID="rfvCategoria" runat="server" ControlToValidate="ddlCategoria" InitialValue="0" CssClass="text-danger" ErrorMessage="* Seleccione una categoría" Display="Dynamic" />
+                <asp:RequiredFieldValidator ID="rfvCategoria" runat="server" ControlToValidate="ddlCategoria" InitialValue="0" CssClass="text-danger" ErrorMessage="* Seleccione una categoría" Display="Dynamic" ValidationGroup="AppValidaciones" />
             </div>
 
             <asp:HiddenField ID="hfId" runat="server" />
 
             <div class="mt-3">
-                <asp:Button ID="btnAgregar" runat="server" CssClass="btn btn-success" Text="Agregar" OnClick="btnAgregar_Click" />
-                <asp:Button ID="btnActualizar" runat="server" CssClass="btn btn-primary" Text="Actualizar" OnClick="btnActualizar_Click" Visible="false" />
-                <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-secondary" Text="Cancelar" OnClick="btnCancelar_Click" Visible="false" />
+                <asp:Button ID="btnAgregar" runat="server" CssClass="btn btn-success" Text="Agregar" OnClick="btnAgregar_Click" ValidationGroup="AppValidaciones" />
+                <asp:Button ID="btnActualizar" runat="server" CssClass="btn btn-primary" Text="Actualizar" OnClick="btnActualizar_Click" Visible="false" ValidationGroup="AppValidaciones" />
+                <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-secondary" Text="Cancelar" OnClick="btnCancelar_Click" Visible="false" CausesValidation="false" />
             </div>
         </div>
 
