@@ -13,6 +13,53 @@ namespace sistemaAplicaciones
 {
     public partial class Categorias : System.Web.UI.Page
     {
-        
+        string conexion = ConfigurationManager.ConnectionStrings["cadenaConexion"].ConnectionString;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                CargarCategorias();
+            }
+        }
+
+        private void CargarCategorias()
+        {
+            using (SqlConnection conn = new SqlConnection(conexion))
+            {
+                using (SqlCommand cmd = new SqlCommand("sp_VisualizarCategorias", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    gvCategorias.DataSource = dt;
+                    gvCategorias.DataBind();
+                }
+            }
+        }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand("sp_InsertarCategoria", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
+
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                    }
+                }
+
+                txtNombre.Text = "";
+                CargarCategorias();
+            }
+        }
+
     }
 }
