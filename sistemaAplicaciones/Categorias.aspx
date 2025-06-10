@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <asp:GridView ID="gvCategorias" runat="server" CssClass="table table-striped table-bordered" AutoGenerateColumns="False" OnRowCommand="gvCategorias_RowCommand" DataKeyNames="id">
+        <asp:GridView ID="gvCategorias" runat="server" CssClass="table table-bordered table-striped gridview-dark" AutoGenerateColumns="False" OnRowCommand="gvCategorias_RowCommand" DataKeyNames="id">
             <Columns>
                 <asp:BoundField DataField="id" HeaderText="ID" />
                 <asp:BoundField DataField="nombre" HeaderText="Nombre" />
