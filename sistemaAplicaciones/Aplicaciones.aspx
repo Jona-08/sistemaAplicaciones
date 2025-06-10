@@ -40,7 +40,11 @@
                 <asp:TemplateField HeaderText="Acciones">
                     <ItemTemplate>
                         <asp:Button ID="btnEditar" runat="server" Text="Editar" CssClass="btn btn-sm btn-warning" CommandName="EditarRegistro" CommandArgument='<%# Eval("id") %>' />
-                        <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btn btn-sm btn-danger" CommandName="EliminarRegistro" CommandArgument='<%# Eval("id") %>' OnClientClick="return confirm('¿Estás seguro de eliminar este registro?');" />
+                        <asp:Button ID="btnEliminar" runat="server" Text="Eliminar"
+                            CssClass="btn btn-danger btn-sm"
+                            CommandName="EliminarRegistro"
+                            CommandArgument='<%# Eval("id") %>'
+                            OnClientClick="confirmDelete(event, this);" />
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

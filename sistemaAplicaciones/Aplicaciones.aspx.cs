@@ -62,7 +62,7 @@ namespace sistemaAplicaciones
                 cmd.Parameters.AddWithValue("@categoria_id", ddlCategoria.SelectedValue);
                 con.Open();
                 cmd.ExecuteNonQuery();
-                lblMensaje.Text = "Aplicación agregada correctamente.";
+                ScriptManager.RegisterStartupScript(this, GetType(), "agregado", "Swal.fire('¡Agregado!', 'Aplicación registrada exitosamente.', 'success');", true);
                 LimpiarFormulario();
                 MostrarAplicaciones();
             }
@@ -102,8 +102,9 @@ namespace sistemaAplicaciones
                     cmd.Parameters.AddWithValue("@id", id);
                     con.Open();
                     cmd.ExecuteNonQuery();
-                    lblMensaje.Text = "Aplicación eliminada correctamente.";
+                    
                     MostrarAplicaciones();
+                    ScriptManager.RegisterStartupScript(this, GetType(), "eliminado", "Swal.fire('¡Eliminado!', 'Aplicación eliminada correctamente.', 'success');", true);
                 }
             }
         }
@@ -120,7 +121,7 @@ namespace sistemaAplicaciones
                 cmd.Parameters.AddWithValue("@categoria_id", ddlCategoria.SelectedValue);
                 con.Open();
                 cmd.ExecuteNonQuery();
-                lblMensaje.Text = "Aplicación actualizada correctamente.";
+                ScriptManager.RegisterStartupScript(this, GetType(), "actualizado", "Swal.fire('¡Actualizado!', 'Aplicación editada exitosamente.', 'success');", true);
                 LimpiarFormulario();
                 MostrarAplicaciones();
             }

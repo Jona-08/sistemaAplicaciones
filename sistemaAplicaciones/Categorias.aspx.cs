@@ -20,7 +20,6 @@ namespace sistemaAplicaciones
             if (!IsPostBack)
             {
                 CargarCategorias();
-                lblMensaje.Text = "";
             }
         }
 
@@ -73,9 +72,7 @@ namespace sistemaAplicaciones
             btnAgregar.Visible = true;
             btnActualizar.Visible = false;
             btnCancelar.Visible = false;
-
-            lblMensaje.Text = "❌ Edición cancelada.";
-            lblMensaje.CssClass = "text-warning fw-bold d-block mt-3";
+            ScriptManager.RegisterStartupScript(this, GetType(), "mensajeAgregado", "Swal.fire('¡Éxito!', 'Edicion de Categoria Cancelada', 'success');", true);
         }
 
         protected void gvCategorias_RowCommand(object sender, GridViewCommandEventArgs e)
