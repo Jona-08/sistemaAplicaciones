@@ -20,4 +20,17 @@
                 </div>
             </div>
         </div>
+        <asp:GridView ID="gvCategorias" runat="server" CssClass="table table-striped table-bordered" AutoGenerateColumns="False" OnRowCommand="gvCategorias_RowCommand" DataKeyNames="id">
+            <Columns>
+                <asp:BoundField DataField="id" HeaderText="ID" />
+                <asp:BoundField DataField="nombre" HeaderText="Nombre" />
+                <asp:TemplateField HeaderText="Acciones">
+                    <ItemTemplate>
+                        <asp:Button ID="btnEditar" runat="server" CommandName="Editar" CommandArgument='<%# Eval("id") %>' Text="Editar" CssClass="btn btn-warning btn-sm me-2" />
+                        <asp:Button ID="btnEliminar" runat="server" CommandName="Eliminar" CommandArgument='<%# Eval("id") %>' Text="Eliminar" CssClass="btn btn-danger btn-sm" OnClientClick="return confirm('¿Estás seguro de eliminar esta categoría?');" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
 </asp:Content>
