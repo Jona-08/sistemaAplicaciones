@@ -130,6 +130,8 @@ namespace sistemaAplicaciones
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             LimpiarFormulario();
+            ScriptManager.RegisterStartupScript(this, GetType(), "actualizado", "Swal.fire('¡Cancelado!', 'Edicion de Aplicacion Cancelada', 'success');", true);
+
         }
 
         private void LimpiarFormulario()

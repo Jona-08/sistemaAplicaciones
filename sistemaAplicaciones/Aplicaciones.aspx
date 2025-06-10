@@ -39,12 +39,22 @@
                 <asp:BoundField DataField="categoria" HeaderText="Categoría" />
                 <asp:TemplateField HeaderText="Acciones">
                     <ItemTemplate>
-                        <asp:Button ID="btnEditar" runat="server" Text="Editar" CssClass="btn btn-sm btn-warning" CommandName="EditarRegistro" CommandArgument='<%# Eval("id") %>' />
-                        <asp:Button ID="btnEliminar" runat="server" Text="Eliminar"
-                            CssClass="btn btn-danger btn-sm"
-                            CommandName="EliminarRegistro"
+                        <asp:LinkButton ID="btnEditar" runat="server"
+                            CommandName="EditarRegistro"
                             CommandArgument='<%# Eval("id") %>'
-                            OnClientClick="confirmDelete(event, this);" />
+                            CssClass="btn btn-sm btn-warning me-1"
+                            ToolTip="Editar">
+                            <i class="bi bi-pencil-square">Editar</i>
+                        </asp:LinkButton>
+                        <asp:LinkButton ID="btnEliminar" runat="server"
+                            CommandName="Eliminar"
+                            CommandArgument='<%# Eval("id") %>'
+                            CssClass="btn btn-sm btn-danger"
+                            ToolTip="Eliminar"
+                            OnClientClick="confirmDelete(event, this);">
+                            <i class="bi bi-trash">Eliminar</i>
+                        </asp:LinkButton>
+
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
