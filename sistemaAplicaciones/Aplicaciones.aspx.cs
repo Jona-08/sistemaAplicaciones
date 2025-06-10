@@ -108,6 +108,40 @@ namespace sistemaAplicaciones
             }
         }
 
+        protected void btnActualizar_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection con = new SqlConnection(conexion))
+            {
+                SqlCommand cmd = new SqlCommand("sp_EditarAplicacion", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", hfId.Value);
+                cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
+                cmd.Parameters.AddWithValue("@descripcion", txtDescripcion.Text);
+                cmd.Parameters.AddWithValue("@categoria_id", ddlCategoria.SelectedValue);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                lblMensaje.Text = "Aplicación actualizada correctamente.";
+                LimpiarFormulario();
+                MostrarAplicaciones();
+            }
+        }
 
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            LimpiarFormulario();
+        }
+
+        private void LimpiarFormulario()
+        {
+            txtNombre.Text = "";
+            txtDescripcion.Text = "";
+            ddlCategoria.SelectedIndex = 0;
+            hfId.Value = "";
+
+            btnAgregar.Visible = true;
+            btnActualizar.Visible = false;
+            btnCancelar.Visible = false;
+        }
     }
+
 }
