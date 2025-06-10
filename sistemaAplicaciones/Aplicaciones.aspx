@@ -5,7 +5,8 @@
         <h2 class="mb-4">Gestión de Aplicaciones</h2>
 
         <!-- Formulario -->
-        <div class="card shadow p-4 mb-4">
+        <!-- Formulario -->
+        <div class="card shadow p-4 mb-4 form-container">
             <div class="form-group">
                 <label>Nombre:</label>
                 <asp:TextBox ID="txtNombre" CssClass="form-control" runat="server" />
@@ -31,6 +32,7 @@
             </div>
         </div>
 
+
         <asp:GridView ID="gvAplicaciones" runat="server" CssClass="table table-bordered table-striped gridview-dark" AutoGenerateColumns="False" OnRowCommand="gvAplicaciones_RowCommand">
             <Columns>
                 <asp:BoundField DataField="id" HeaderText="ID" />
@@ -39,22 +41,12 @@
                 <asp:BoundField DataField="categoria" HeaderText="Categoría" />
                 <asp:TemplateField HeaderText="Acciones">
                     <ItemTemplate>
-                        <asp:LinkButton ID="btnEditar" runat="server"
-                            CommandName="EditarRegistro"
+                        <asp:Button ID="btnEditar" runat="server" Text="Editar" CssClass="btn btn-sm btn-warning" CommandName="EditarRegistro" CommandArgument='<%# Eval("id") %>' />
+                        <asp:Button ID="btnEliminar" runat="server" Text="Eliminar"
+                            CssClass="btn btn-danger btn-sm"
+                            CommandName="EliminarRegistro"
                             CommandArgument='<%# Eval("id") %>'
-                            CssClass="btn btn-sm btn-warning me-1"
-                            ToolTip="Editar">
-                            <i class="bi bi-pencil-square">Editar</i>
-                        </asp:LinkButton>
-                        <asp:LinkButton ID="btnEliminar" runat="server"
-                            CommandName="Eliminar"
-                            CommandArgument='<%# Eval("id") %>'
-                            CssClass="btn btn-sm btn-danger"
-                            ToolTip="Eliminar"
-                            OnClientClick="confirmDelete(event, this);">
-                            <i class="bi bi-trash">Eliminar</i>
-                        </asp:LinkButton>
-
+                            OnClientClick="confirmDelete(event, this);" />
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
