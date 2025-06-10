@@ -15,6 +15,7 @@
                         CssClass="text-danger"
                         Display="Dynamic"
                         ValidationGroup="CategoriaValidacion"/>
+                    <asp:Label ID="lblMensaje" runat="server" CssClass="fw-bold d-block mt-3"></asp:Label>
                </div>
                 
                 <div class="mt-3">
@@ -31,7 +32,7 @@
                 <asp:TemplateField HeaderText="Acciones">
                     <ItemTemplate>
                         <asp:Button ID="btnEditar" runat="server" CommandName="Editar" CommandArgument='<%# Eval("id") %>' Text="Editar" CssClass="btn btn-warning btn-sm me-2" />
-                        <asp:Button ID="btnEliminar" runat="server" CommandName="Eliminar" CommandArgument='<%# Eval("id") %>' Text="Eliminar" CssClass="btn btn-danger btn-sm" OnClientClick="return confirm('¿Estás seguro de eliminar esta categoría?');" />
+                        <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btn btn-danger btn-sm" CommandName="Eliminar" CommandArgument='<%# Eval("id") %>' OnClientClick="confirmDelete(event, this);" />
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

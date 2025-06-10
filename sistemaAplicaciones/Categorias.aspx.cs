@@ -20,6 +20,7 @@ namespace sistemaAplicaciones
             if (!IsPostBack)
             {
                 CargarCategorias();
+                lblMensaje.Text = "";
             }
         }
 
@@ -58,7 +59,10 @@ namespace sistemaAplicaciones
 
                 txtNombre.Text = "";
                 CargarCategorias();
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "mensajeAgregado", "Swal.fire('¡Éxito!', 'Categoría agregada correctamente', 'success');", true);
             }
+
         }
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -69,6 +73,9 @@ namespace sistemaAplicaciones
             btnAgregar.Visible = true;
             btnActualizar.Visible = false;
             btnCancelar.Visible = false;
+
+            lblMensaje.Text = "❌ Edición cancelada.";
+            lblMensaje.CssClass = "text-warning fw-bold d-block mt-3";
         }
 
         protected void gvCategorias_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -91,6 +98,8 @@ namespace sistemaAplicaciones
                 }
 
                 CargarCategorias();
+                ScriptManager.RegisterStartupScript(this, GetType(), "mensajeAgregado", "Swal.fire('¡Éxito!', 'Categoría eliminado correctamente', 'success');", true);
+
             }
             if (e.CommandName == "Editar")
             {
@@ -148,6 +157,8 @@ namespace sistemaAplicaciones
                 btnCancelar.Visible = false;
 
                 CargarCategorias();
+                ScriptManager.RegisterStartupScript(this, GetType(), "mensajeActualizado", "Swal.fire('¡Actualizado!', 'Categoría actualizada exitosamente', 'success');", true);
+
             }
         }
     }

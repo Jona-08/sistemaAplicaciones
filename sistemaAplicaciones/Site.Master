@@ -55,6 +55,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" />
         <div class="container-fluid">
             <div class="row">
                 <!-- Sidebar -->
@@ -76,4 +77,28 @@
         </div>
     </form>
 </body>
+
+<script>
+    function confirmDelete(event, button) {
+        event.preventDefault(); // Evita el postback inmediato
+
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Hace el postback del botón manualmente
+                __doPostBack(button.name, button.getAttribute('commandargument'));
+            }
+        });
+    }
+</script>
+
+
 </html>
