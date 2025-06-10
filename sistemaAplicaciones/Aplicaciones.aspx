@@ -2,9 +2,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container mt-5">
-        <h2 class="mb-4">Gestión de Aplicaciones</h2>
+        <h2 class="mb-4 text-center ">Gestión de Aplicaciones</h2>
 
-        <!-- Formulario -->
         <!-- Formulario -->
         <div class="card shadow p-4 mb-4 form-container">
             <div class="form-group">

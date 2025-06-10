@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <div class="container mt-5">
-            <h2 class="mb-4 text-white">Gestión de Categorías</h2>
+            <h2  class="mb-4 text-white text-center"> Gestión de Categorías</h2>
 
             <div class="card shadow rounded p-4 mb-4 form-container">
                 <div class="row">
