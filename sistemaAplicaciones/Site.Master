@@ -256,15 +256,13 @@
         }
 
         body {
-            background-image: url('img/jojo.jpg'); /* Ruta correcta a la imagen */
-            background-size: cover;               /* Cubre toda el área visible */
-            background-position: center center;  /* Centra la imagen */
-            background-repeat: no-repeat;         /* No se repite */
-            background-attachment: fixed;         /* Fondo fijo al hacer scroll */
-            background-color: #212529;            /* Fondo de respaldo oscuro para contraste */
-            color: #f8f9fa;                      /* Texto claro para buena legibilidad */
-            min-height: 100vh;                   /* Asegura que el body ocupe toda la altura */
+            background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
+
 
         /* Para que el contenido tenga un fondo que permita lectura sobre la imagen */
         .content {
