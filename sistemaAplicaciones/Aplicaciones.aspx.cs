@@ -12,6 +12,15 @@ namespace sistemaAplicaciones
 {
     public partial class Aplicaciones : System.Web.UI.Page
     {
-     
+        string conexion = ConfigurationManager.ConnectionStrings["cadenaConexion"].ConnectionString;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                CargarCategorias();
+                MostrarAplicaciones();
+            }
+        }
     }
 }
